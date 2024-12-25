@@ -35,6 +35,7 @@ typedef struct
 {
     MPU6050_Vector3 accelerometer;
     MPU6050_Vector3 gyroscope;
+    int16_t temperature;
 } MPU6050;
 
 void MPU6050_Init(MPU6050_AccelerometerFSR accelerometer_fsr, MPU6050_GyroscopeFSR gyroscope_fsr);

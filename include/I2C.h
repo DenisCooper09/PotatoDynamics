@@ -21,7 +21,6 @@ void I2C_Start();
 void I2C_Stop();
 
 void I2C_Transmit(uint8_t data);
-uint8_t I2C_Receive8(I2C_Acknowledgement ack);
-int16_t I2C_Receive16(I2C_Acknowledgement ack);
+uint8_t I2C_Receive(I2C_Acknowledgement ack);
 
 #endif // POTATO_DYNAMICS_I2C_H

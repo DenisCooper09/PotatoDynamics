@@ -23,17 +23,13 @@ void MPU6050_Read(MPU6050 *mpu6050)
     I2C_Start();
     I2C_Transmit(MPU6050_ADDRESS_READ);
 
-    mpu6050->accelerometer.x = I2C_Receive16(I2C_ACK);
-    mpu6050->accelerometer.y = I2C_Receive16(I2C_ACK);
-    mpu6050->accelerometer.z = I2C_Receive16(I2C_ACK);
-
-    // Ignore temperature LSB and MSB registers.
-    I2C_Receive8(I2C_ACK);
-    I2C_Receive8(I2C_ACK);
-
-    mpu6050->gyroscope.x = I2C_Receive16(I2C_ACK);
-    mpu6050->gyroscope.y = I2C_Receive16(I2C_ACK);
-    mpu6050->gyroscope.z = I2C_Receive16(I2C_NAK);
+    mpu6050->accelerometer.x = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->accelerometer.y = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->accelerometer.z = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->temperature     = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->gyroscope.x     = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->gyroscope.y     = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_ACK);
+    mpu6050->gyroscope.z     = ((int16_t) I2C_Receive(I2C_ACK) << 8) | (int16_t) I2C_Receive(I2C_NAK);
 
     I2C_Stop();
 }

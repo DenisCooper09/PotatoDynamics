@@ -24,14 +24,9 @@ void I2C_Transmit(uint8_t data)
     while (!(TWCR & (1 << TWINT)));
 }
 
-uint8_t I2C_Receive8(I2C_Acknowledgement ack)
+uint8_t I2C_Receive(I2C_Acknowledgement ack)
 {
     TWCR = (1 << TWEN) | (1 << TWINT) | (ack << TWEA);
     while (!(TWCR & (1 << TWINT)));
     return TWDR;
-}
-
-int16_t I2C_Receive16(I2C_Acknowledgement ack)
-{
-    return (I2C_Receive8(I2C_ACK) << 8) | I2C_Receive8(ack);
 }
