@@ -1,6 +1,6 @@
 #include "MPU6050.h"
 
-void MPU6050_Init(MPU6050_AccelerometerFSR accelerometer_fsr, MPU6050_GyroscopeFSR gyroscope_fsr)
+void MPU6050_Init(MPU6050_Config *config)
 {
     I2C_Start();
     I2C_Transmit(MPU6050_ADDRESS_WRITE);
@@ -9,8 +9,8 @@ void MPU6050_Init(MPU6050_AccelerometerFSR accelerometer_fsr, MPU6050_GyroscopeF
     I2C_Start();
     I2C_Transmit(MPU6050_ADDRESS_WRITE);
     I2C_Transmit(MPU6050_GYRO_CONFIG_REGISTER); // Write from "GYRO_CONFIG" until "ACCEL_CONFIG" register
-    I2C_Transmit(gyroscope_fsr);
-    I2C_Transmit(accelerometer_fsr);
+    I2C_Transmit(config->gyroscope_fsr);
+    I2C_Transmit(config->accelerometer_fsr);
     I2C_Stop();
 }
 
