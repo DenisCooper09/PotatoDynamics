@@ -1,7 +1,5 @@
 #include "BME280.h"
 
-static int32_t t_fine;
-
 void BME280_Init(BME280_Config *config)
 {
     I2C_Start();
